@@ -1,0 +1,268 @@
+<br />
+<!-- heading row -->
+<div class="row">
+  <div class="col-md-12 text-center">
+    <h1>Currency</h1>
+  </div>
+</div>
+<!-- end heading row -->
+
+<!-- start menubar buttons -->
+<div class="topnav boxShadow">
+  <div class="container">
+    <a class="pointerCursor" data-toggle="modal" data-target="#currencyModal" (click)="clear()">
+      <i class="fa fa-plus-square"></i>
+      Options
+    </a>
+    <a class="pointerCursor" (click)="printDiv()">
+      <i class="fa fa-print"></i>
+      Print
+    </a>
+    <a class="pointerCursor" (click)="downloadPDF()">
+      <i class="fa fa-file-pdf-o"></i>
+      PDF
+    </a>
+    <a class="pointerCursor" (click)="downloadCSV()">
+      <i class="fa fa-file-text-o"></i>
+      CSV
+    </a>
+    <a class="pointerCursor" (click)="downloadExcel()">
+      <i class="fa fa-file-excel-o"></i>
+      Excel
+    </a>
+  </div>
+</div>
+<!-- end menubar buttons -->
+
+<br><br />
+
+
+
+<!-- Start Currency Table Container -->
+<div class="container ">
+  <br>
+  <!--Start search textbox Row-->
+  <div class="row">
+    <div class="col-md-12">
+      <mat-form-field class="fullwidth">
+        <input matInput [(ngModel)]="tblSearch" placeholder="Search">
+      </mat-form-field>
+      <i class="fab fa-accessible-icon"></i>
+    </div>
+  </div>
+  <!--end search textbox Row-->
+
+  <!--Start table Row-->
+  <div class="row">
+    <table class="table table-striped fullwidth" id="myTable">
+      <thead>
+        <tr class="d-flex">
+
+          <th class="col-2 text-center">
+            Sr No.
+          </th>
+          <th [class.active]="" (click)="setOrder('currencyName')" class="col-4">
+            Currency Name
+            <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+            <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+          </th>
+          <th [class.active]="" (click)="setOrder('countryName')" class="col-4">
+            Country Name
+            <span class="fa fa-angle-double-down" [hidden]="reverse"></span>
+            <span class="fa fa-angle-double-up" [hidden]="!reverse"></span>
+          </th>
+          <th class="col-2 text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of currencies | search:'currencyName,countryName' :tblSearch | paginate: { itemsPerPage: itemPerPage, currentPage: p } | orderBy: order:reverse:'case-insensitive' let i=index"
+          class='d-flex'>
+
+          <td class="col-2 text-center">{{i + 1}}</td>
+          <td class="col-4">{{item.currencyName}}</td>
+          <td class="col-4">{{item.cntryName}}</td>
+          <td class="col-2 text-center">
+            <span class="fa fa-edit pointerCursor text-primary" data-toggle="modal" data-target="#currencyModal"></span>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="fa fa-trash pointerCursor text-danger" data-toggle="modal" data-target="#deleteModal"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="col-md-10">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+    <div class="col-md-2 text-right">
+      <mat-form-field class="fullwidth pagenateList">
+        <mat-select placeholder="Items Per Page" [(ngModel)]="itemPerPage">
+          <mat-option value="10">10</mat-option>
+          <mat-option value="15">15</mat-option>
+          <mat-option value="20">20</mat-option>
+          <mat-option value="25">25</mat-option>
+          <mat-option value="30">30</mat-option>
+          <mat-option value="35">35</mat-option>
+          <mat-option value="40">40</mat-option>
+          <mat-option value="45">45</mat-option>
+          <mat-option value="50">50</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </div>
+  <!-- end table row -->
+  <br />
+</div>
+<!-- End Currency Table Container -->
+
+<!-- Hidden Table Starts for Excel and CSV files -->
+<igx-grid #excelDataContent [data]="excelDataList" [autoGenerate]="false" height="null" width="null" [hidden]="true">
+</igx-grid>
+<!-- Hidden Table Ends  for Excel and CSV files -->
+
+<!-- Hidden Table for Print and PDF files starts-->
+<div class="container printArea" id="printArea" #exportPDF>
+  <div class="printDiv">
+
+    <!--Start heading table -->
+    <table>
+      <tr>
+        <td width="15%" style="border:none;">
+          <img src="../../../assets/images/logo.png" width="135px">
+        </td>
+
+        <td style="border:none;">
+          <div class="commonCss cssHeading">Infomatrix</div>
+          <div class="commonCss cssAddress">Al Anayat Plaza, G11 Markz, Islamabad</div>
+          <div class="commonCss cssContact">Mobile: 0300-2318659, Ph. 051-1234567</div>
+        </td>
+      </tr>
+    </table>
+    <!--End heading table -->
+
+    <br /><br />
+
+    <!--Start table Row-->
+    <div class="row">
+      <table id="printTable">
+        <thead>
+          <tr>
+            <th>Sr No.</th>
+            <th>Currency Name</th>
+            <th>Country Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of currencies | search:'currencyName,countryName' :tblSearch let i=index">
+            <td>{{i + 1}}</td>
+            <td>{{item.currencyName}}</td>
+            <td>{{item.cntryName}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!-- end table row -->
+  </div>
+</div>
+<!-- Hidden Table for Print and PDF files ends-->
+
+<br><br><br>
+
+
+
+<!-- Start Add Currency Modal Window -->
+<div class="modal fade" id="currencyModal">
+  <div class="modal-dialog shadow-lg-dark modal-lg">
+    <div class="modal-content">
+
+      <!--start Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">New Currency</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!--end Modal Header -->
+
+      <!--start Modal body -->
+      <div class="modal-body">
+        <!-- start 1nd row -->
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="fullwidth">
+              <input matInput placeholder="Currency Name" [(ngModel)]="currencyName" required>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="fullwidth">
+              <input matInput placeholder="Country Name" [(ngModel)]="countryName" required>
+            </mat-form-field>
+          </div>
+        </div><!-- end 1nd row -->
+        <br>
+
+        <!--button tag-->
+        <button mat-raised-button color="primary" (click)="getFilteredCurrency()"> Search </button>
+        &nbsp;
+        <button mat-raised-button (click)="clear()">Reset</button>
+      </div>
+      <!--end Modal body -->
+
+      <!--start Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+      <!--end Modal footer -->
+
+    </div>
+  </div>
+</div>
+<!-- End Currency Modal Window  -->
+
+
+
+<!-- Start Modal Window to delete Payemnt voucher data -->
+<div class="modal fade" id="deleteModal">
+  <div class="modal-dialog shadow-lg-dark">
+    <div class="modal-content">
+      <!--start delete user Modal body -->
+      <div class="modal-body">
+        <br>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h2>Delete Currency</h2>
+            <!-- <h2 [(ngModel)]="userName">{{userName}}</h2> -->
+          </div>
+        </div><br />
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="fullwidth">
+              <input matInput placeholder="Enter Password" type="password" [(ngModel)]="txtdPassword">
+            </mat-form-field>
+          </div>
+        </div><br>
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="fullwidth">
+              <input matInput placeholder="Enter PIN" type="password" [(ngModel)]="txtdPin">
+            </mat-form-field>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-6">
+            <button mat-raised-button color="warn">Delete</button>
+          </div>
+        </div>
+        <br />
+      </div>
+      <!--end delete user Modal body -->
+
+      <!--start delete user Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" id="closeDeleteModel">Close</button>
+      </div>
+      <!--end delete user Modal footer -->
+
+    </div>
+  </div>
+</div>
+<!-- End Modal Window to delete Payemnt voucher data -->

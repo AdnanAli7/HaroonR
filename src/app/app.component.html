@@ -1,0 +1,125 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <!-- Side Menu Title -->
+    <div class="row">
+      <div class="col-md-12 bg-light-green">
+        <div class="row">
+          <div class="col-md-4">
+            <button type="button" routerLink='' class="noneOutLine bg-light-green sideMenuHome rightBorderWhite"
+              mat-flat-button>
+              <span class="fa fa-home"></span>
+            </button>
+          </div>
+          <div class="col-md-8">
+            <p style="margin-top: 1.0em !important">CMIS - Menu</p>
+          </div>
+        </div>
+      </div>
+    </div><!-- end Side Menu Title -->
+    <br>
+
+    <!-- Circle Log -->
+    <div class="row">
+      <div class="col-md-12 mx-auto">
+        <img class="mx-auto d-block" src="../assets/images/logo.png" alt="" width="100em" height="100em">
+      </div>
+    </div>
+    <!--end Circle Logo -->
+    <br>
+    <!-- UMIS Menu -->
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="nav">
+          <!-- <li routerLinkActive='active'>
+            <a routerLink='dashboard'>
+              <span class="fa fa-tachometer"></span>
+              <span class="text">Dashboard</span>
+            </a>
+          </li>
+          <li routerLinkActive='active'>
+            <a routerLink='company'>
+              <span class="fa fa-window-restore"></span>
+              <span class="text">New Company</span>
+            </a>
+          </li>
+          <li routerLinkActive='active'>
+            <a routerLink='headquarter'>
+              <span class="fa fa-building"></span>
+              <span class="text">Head Quarter</span>
+            </a>
+          </li>
+          <li routerLinkActive='active'>
+            <a routerLink='branch'>
+              <span class="fa fa-server"></span>
+              <span class="text">New Branch</span>
+            </a>
+          </li>
+          <li routerLinkActive='active'>
+            <a routerLink='department'>
+              <span class="fa fa-link"></span>
+              <span class="text">Add Department</span>
+            </a>
+          </li>
+          <li routerLinkActive='active'>
+            <a routerLink='section'>
+              <span class="fa fa-puzzle-piece"></span>
+              <span class="text">Add Section</span>
+            </a>
+          </li>
+          <li routerLinkActive='active'>
+            <a routerLink='subsidiaries'>
+              <span class="fa fa-stack-overflow"></span>
+              <span class="text">New Subsidiaries</span>
+            </a>
+          </li> -->
+          <li routerLinkActive='active'>
+            <a routerLink='currency'>
+              <span class="fa fa-money"></span>
+              <span class="text">New Currency </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- end UMIS Menu -->
+
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <div class="row bgWhite bottomBorder">
+      <div class="col-md-1">
+        <button type="button" class="noneOutLine" mat-flat-button color="warn" (click)="drawer.toggle()">
+          <span class="fa fa-bars sideMenubar"></span>
+        </button>
+      </div>
+      <div class="col-md-5">
+        <h4>ERP Reports</h4>
+      </div>
+      <div class="col-md-6 text-right">
+        <button mat-button [matMenuTriggerFor]="menu" class="noneOutLine">
+          Haroon Qadeer
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item class="noneOutLine" routerLink="">
+            <!-- <mat-icon>dialpad</mat-icon> -->
+            <span class="fa fa-sign-out"></span>
+            <span> Log out</span>
+          </button>
+        </mat-menu>
+      </div>
+
+    </div>
+
+    <!-- Spinner Starts -->
+    <ngx-spinner bdOpacity=0.9 bdColor="rgba(51,51,51,0.91)" size="medium" color="#ff871c" type="ball-clip-rotate-multiple"
+      fullScreen="true">
+      <p style="color: white"> Loading... </p>
+    </ngx-spinner>
+    <!-- Spinner Ends -->
+
+    <router-outlet></router-outlet>
+  </div>
+
+</mat-drawer-container>

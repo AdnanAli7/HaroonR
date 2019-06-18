@@ -1,0 +1,36 @@
+.printDiv {
+  display: none;
+}
+
+table {
+  width: 100%;
+  border: 0px solid green;
+}
+
+.printDiv table thead tr th {
+  font-size: 20px;
+  border: 1px solid black;
+}
+
+.printDiv table tbody tr td {
+  border: 1px solid black;
+  height: 33px;
+}
+
+.commonCss {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+.cssHeading {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.cssAddress {
+  font-size: 16px;
+}
+
+.cssContact {
+  font-size: 16px;
+}
