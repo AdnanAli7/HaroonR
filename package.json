@@ -30,7 +30,7 @@
     "font-awesome": "^4.7.0",
     "highcharts": "^6.2.0",
     "igniteui-angular": "^7.2.1",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "jspdf": "^1.5.3",
     "ng6-toastr-notifications": "^1.0.4",
     "ngx-bootstrap": "^3.0.1",
